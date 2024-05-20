@@ -1,0 +1,156 @@
+//react js props
+
+--------------Ex-1----------------
+--App.js
+
+import './App.css';
+
+function App(props) {
+  return (
+    <div className="App">
+    <div className="employee">
+    <h1>Name is:{props.name}</h1>
+    <h1>Age is:{props.age}</h1>
+    </div>
+    </div>
+  );
+}
+
+export default App;
+
+--index.js
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+  <React.StrictMode>
+    <App 
+    name="vivek"
+    age="121"
+    />
+  </React.StrictMode>
+);
+
+-------------------Ex-2---------------------
+Make reusable comp
+//App.js
+import './App.css';
+
+function Car(props) {
+  return (
+    <div className="car">
+      <img src={props.imgUrl} />
+      <h2>My {props.make}</h2>
+      <p>
+        My {props.make} is {props.color}
+      </p>
+      <p>It's a bit older, from {props.year}</p>
+    </div>
+  );
+}
+export default Car;
+
+//----------App.js-----------------------------
+
+import './App.css';
+import Car from './Cars';
+function App(props) {
+  return (
+    <div className="App">
+    <div className="employee">
+    <h1>Name is:{props.name}</h1>
+    <h1>Age is:{props.age}</h1>
+    <div class="cars">
+    <Car
+      make="BMW"
+      color="blue"
+      year="2011"
+      imgUrl="https://www.codingexercises.com/img/2022-01-25/001-bmw-blue.jpg"
+    />
+    <Car
+      make="Mercedes"
+      color="gray"
+      year="2018"
+      imgUrl="https://www.codingexercises.com/img/2022-01-25/002-mercedes-gray.jpg"
+    />
+    <Car
+      make="Toyota"
+      color="gray"
+      year="new"
+      imgUrl="https://www.codingexercises.com/img/2022-01-25/003-toyota-gray.jpg"
+    />
+    <Car
+      make="Alpha Romeo"
+      color="red"
+      year="2012"
+      imgUrl="https://www.codingexercises.com/img/2022-01-25/004-alpha-romeo-red.jpg"
+    />
+  </div>
+    </div>
+    </div>
+  );
+}
+
+export default App;
+
+//App.css
+
+.cars {
+  display: flex;
+  flex-wrap: wrap;
+}
+.car {
+  border: 1px solid gray;
+  margin: 20px;
+  padding: 20px;
+  width: 300px;
+}
+.car img {
+  width: 100%;
+}
+
+-----Ex-3 Count with state
+
+class Counter extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { count: 0 };
+  }
+
+  incremen1tCount = () => {
+    this.setState({ count: this.state.count + 1 });
+  };
+
+  render() {
+    return (
+      <div>
+        <p>Count: {this.state.count}</p>
+        <button onClick={this.incrementCount}>Increment</button>
+      </div>
+    );
+  }
+}
+
+----------------Ex-4-----------------
+Updating Parent State from Child
+class Parent extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { message: '' };
+  }
+
+  updateMessage = (msg) => {
+    this.setState({ message: msg });
+  }
+
+  render() {
+    return (
+      <div>
+        <Child onUpdate={this.updateMessage} />
+        <p>Message: {this.state.message}</p>
+      </div>
+    );
+  }
+}
+
+function Child(props) {
+  return <button onClick={() => props.onUpdate('Hello from Child!')}>Update Parent</button>;
+}
