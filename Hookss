@@ -1,0 +1,96 @@
+//1.useEffect
+
+//import { useState, useEffect } from "react";
+// import ReactDOM from "react-dom/client";
+// function Hooks11() {
+//     const [count, setCount] = useState(0);
+//     const [calculation, setCalculation] = useState(0);
+//     useEffect(() => {
+//         setCalculation(() => count * 2);
+//     }, [count]);
+//     console.log(count)
+//     return (
+//     <>
+//         <p>Count: {count}</p>
+//         <button
+//         onClick={() => setCount((c) => c + 1)}
+//         >+</button>
+//         <p>Calculation: {calculation}</p>
+//      </>
+//      );
+// }
+// export default Hooks11
+
+//2.
+
+import React, { useState, useEffect } from 'react';
+
+const App = () => {
+  const [message, setMessage] = useState('Hi there, how are you?');
+
+  useEffect(() => {
+    console.log('trigger use effect hook');
+
+    setTimeout(() => {
+      setMessage("I'm fine, thanks for asking.");
+    }, 1000)
+  })
+
+  return <h1>{message}</h1>
+};
+
+export default App;
+
+//3.Genreral usage of useEffect in reactjs
+
+import React, { useState, useEffect } from 'react';
+
+const Hooks11 = () => {
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    // Fetch data from an API
+    fetch('https://api.example.com/data')
+      .then((response) => response.json())
+      .then((result) => setData(result))
+      .catch((error) => console.error('Error fetching data:', error));
+  }, []); // Empty dependency array means this effect runs once after the initial render
+
+  return (
+    <div>
+      {data ? (
+        <ul>
+          {data.map((item) => (
+            <li key={item.id}>{item.name}</li>
+          ))}
+        </ul>
+      ) : (
+        <p>Loading data...</p>
+      )}
+    </div>
+  );
+};
+
+export default Hooks11;
+
+//4.useRef Hooks
+
+import { useRef } from 'react';
+
+function CounterHook() {
+  let ref = useRef(0);
+
+  function handleClick() {
+    ref.current = ref.current + 1;
+    alert('You clicked ' + ref.current + ' times!');
+  }
+
+  return (
+    <button onClick={handleClick}>
+      Click me!
+    </button>
+  );
+}
+export default CounterHook;
+
+5.//
